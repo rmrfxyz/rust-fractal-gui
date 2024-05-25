@@ -1,10 +1,15 @@
-use vergen::{Config, Error, ShaKind, TimestampKind, vergen};
+use anyhow::Result;
+use vergen::EmitBuilder;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut config = Config::default();
-    // Generate all three date/time instructions
-    *config.git_mut().sha_kind_mut() = ShaKind::Short;
-    *config.git_mut().commit_timestamp_kind_mut() = TimestampKind::DateAndTime;
-    // Generate the default 'cargo:' instruction output
-    vergen(config).map_err(Error::into)
+pub fn main() -> Result<()> {
+    // NOTE: This will output everything, and requires all features enabled.
+    // NOTE: See the EmitBuilder documentation for configuration options.
+    EmitBuilder::builder()
+        .all_build()
+        .all_cargo()
+        .all_git()
+        .all_rustc()
+        .all_sysinfo()
+        .emit()?;
+    Ok(())
 }

@@ -9,20 +9,22 @@ build = "build.rs"
 
 [dependencies.druid]
 git = "https://github.com/linebender/druid"
-# rev = "f19ddf1" # update this when upgrading to newer druid
+# rev = "4fe3939" # update this when upgrading to newer druid
 # rev = "399c454"
 
+[dependencies.druid-widget-nursery]
+git = "https://github.com/linebender/druid-widget-nursery.git"
+rev = "c77e67a"
 
 [dependencies]
-# druid = { git = "https://github.com/linebender/druid.git" }
-druid-widget-nursery = { git = "https://github.com/linebender/druid-widget-nursery.git" }
 rust_fractal = {path = "../rust-fractal-core"}
-config = "^0.9"
+config = "0.14.0"
 parking_lot = { version = "0.12.1", features = ["nightly"] }
-float_eq = "^0.6.0"
+float_eq = "1.0.1"
 
 [build-dependencies]
-vergen = "4.2.0"
+vergen = { version = "^8.3.1", features = ["build", "cargo", "git", "gitcl", "rustc", "si"] }
+anyhow = "1.0.81"
 
 [profile.release]
 lto = "fat"

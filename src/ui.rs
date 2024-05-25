@@ -9,7 +9,7 @@ use druid::text::ParseFormatter;
 use druid::commands::CLOSE_ALL_WINDOWS;
 use druid::theme::{PRIMARY_DARK, BACKGROUND_DARK};
 
-use druid_widget_nursery::DropdownSelect;
+// use druid_widget_nursery::DropdownSelect;
 
 use parking_lot::Mutex;
 use std::sync::Arc;
@@ -458,7 +458,7 @@ pub fn window_main(renderer: Arc<Mutex<FractalRenderer>>) -> impl Widget<Fractal
 
     let group_general_information = Flex::column()
         .with_child(Label::new(format!("rust-fractal-gui {}", env!("CARGO_PKG_VERSION"))))
-        .with_child(Label::new(format!("{} {} {}", env!("VERGEN_GIT_SHA_SHORT"), env!("VERGEN_GIT_COMMIT_DATE"), env!("VERGEN_GIT_COMMIT_TIME"))))
+        .with_child(Label::new(format!("{} {} {}", env!("VERGEN_GIT_SHA"), env!("VERGEN_GIT_COMMIT_DATE"), env!("VERGEN_GIT_COMMIT_DATE"))))
         .with_child(Label::new(format!("{} {}", env!("VERGEN_RUSTC_SEMVER"), env!("VERGEN_RUSTC_HOST_TRIPLE"))));
 
     let group_advanced_options = Flex::column()

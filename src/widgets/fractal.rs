@@ -255,8 +255,8 @@ impl Widget<FractalData> for FractalWidget {
                             settings.set("real", location.real().to_string()).unwrap();
                             settings.set("imag", location.imag().to_string()).unwrap();
         
-                            data.real = settings.get_str("real").unwrap();
-                            data.imag = settings.get_str("imag").unwrap();
+                            data.real = settings.get_string("real").unwrap();
+                            data.imag = settings.get_string("imag").unwrap();
 
                             self.mouse_mode = MouseMode::None;
     
@@ -318,8 +318,8 @@ impl Widget<FractalData> for FractalWidget {
                     settings.set("imag", location.imag().to_string()).unwrap();
                     settings.set("zoom", data.zoom.clone()).unwrap();
 
-                    data.real = settings.get_str("real").unwrap();
-                    data.imag = settings.get_str("imag").unwrap();
+                    data.real = settings.get_string("real").unwrap();
+                    data.imag = settings.get_string("imag").unwrap();
 
                     renderer.adjust_iterations();
 
@@ -677,9 +677,9 @@ impl Widget<FractalData> for FractalWidget {
                 }
 
                 if command.is(SET_LOCATION) {
-                    let current_real = settings.get_str("real").unwrap();
-                    let current_imag = settings.get_str("imag").unwrap();
-                    let current_zoom = settings.get_str("zoom").unwrap();
+                    let current_real = settings.get_string("real").unwrap();
+                    let current_imag = settings.get_string("imag").unwrap();
+                    let current_zoom = settings.get_string("zoom").unwrap();
 
                     let current_iterations = settings.get_int("iterations").unwrap() as usize;
                     let current_rotation = settings.get_float("rotate").unwrap();
@@ -747,9 +747,9 @@ impl Widget<FractalData> for FractalWidget {
 
                 // TODO maybe enable the iterations and rotation parts
                 if command.is(REVERT_LOCATION) {
-                    data.real = settings.get_str("real").unwrap();
-                    data.imag = settings.get_str("imag").unwrap();
-                    data.zoom = settings.get_str("zoom").unwrap();
+                    data.real = settings.get_string("real").unwrap();
+                    data.imag = settings.get_string("imag").unwrap();
+                    data.zoom = settings.get_string("zoom").unwrap();
                     data.iteration_limit = settings.get_int("iterations").unwrap() as usize;
 
                     // let current_rotation = settings.get_float("rotate").unwrap();
@@ -967,7 +967,7 @@ impl Widget<FractalData> for FractalWidget {
                         return;
                     }
 
-                    renderer.data_type = match settings.get_str("coloring_type").unwrap().to_ascii_uppercase().as_ref() {
+                    renderer.data_type = match settings.get_string("coloring_type").unwrap().to_ascii_uppercase().as_ref() {
                         "SMOOTH_ITERATION" | "SMOOTH" | "STEP_ITERATION" | "STEP" => DataType::Iteration,
                         "STRIPE" => DataType::Stripe,
                         "DISTANCE_STRIPE" => DataType::DistanceStripe,
@@ -1117,15 +1117,15 @@ impl Widget<FractalData> for FractalWidget {
                     let mut new_settings = Config::default();
                     new_settings.merge(File::with_name("start.toml")).unwrap();
 
-                    settings.set("real", new_settings.get_str("real").unwrap()).unwrap();
-                    settings.set("imag", new_settings.get_str("imag").unwrap()).unwrap();
-                    settings.set("zoom", new_settings.get_str("zoom").unwrap()).unwrap();
+                    settings.set("real", new_settings.get_string("real").unwrap()).unwrap();
+                    settings.set("imag", new_settings.get_string("imag").unwrap()).unwrap();
+                    settings.set("zoom", new_settings.get_string("zoom").unwrap()).unwrap();
                     settings.set("iterations", new_settings.get_int("iterations").unwrap()).unwrap();
                     settings.set("rotate", new_settings.get_float("rotate").unwrap()).unwrap();
 
-                    data.real = settings.get_str("real").unwrap();
-                    data.imag = settings.get_str("imag").unwrap();
-                    data.zoom = settings.get_str("zoom").unwrap().to_uppercase();
+                    data.real = settings.get_string("real").unwrap();
+                    data.imag = settings.get_string("imag").unwrap();
+                    data.zoom = settings.get_string("zoom").unwrap().to_uppercase();
                     data.iteration_limit = settings.get_int("iterations").unwrap() as usize;
                     data.rotation = settings.get_float("rotate").unwrap();
 
@@ -1143,19 +1143,19 @@ impl Widget<FractalData> for FractalWidget {
                     let mut reset_renderer = false;
                     let mut quick_reset = false;
 
-                    if let Ok(real) = new_settings.get_str("real") {
+                    if let Ok(real) = new_settings.get_string("real") {
                         settings.set("real", real.clone()).unwrap();
                         data.real = real;
                         reset_renderer = true;
                     }
 
-                    if let Ok(imag) = new_settings.get_str("imag") {
+                    if let Ok(imag) = new_settings.get_string("imag") {
                         settings.set("imag", imag.clone()).unwrap();
                         data.imag = imag;
                         reset_renderer = true;
                     }
 
-                    if let Ok(zoom) = new_settings.get_str("zoom") {
+                    if let Ok(zoom) = new_settings.get_string("zoom") {
                         settings.set("zoom", zoom.clone()).unwrap();
                         data.zoom = zoom.to_uppercase();
 
@@ -1290,9 +1290,9 @@ impl Widget<FractalData> for FractalWidget {
                 if let Some(file_info) = command.get(SAVE_FILE_AS) {
                     match self.save_type {
                         0 => {
-                            let real = settings.get_str("real").unwrap();
-                            let imag = settings.get_str("imag").unwrap();
-                            let zoom = settings.get_str("zoom").unwrap();
+                            let real = settings.get_string("real").unwrap();
+                            let imag = settings.get_string("imag").unwrap();
+                            let zoom = settings.get_string("zoom").unwrap();
                             let iterations = settings.get_int("iterations").unwrap();
                             let rotate = settings.get_float("rotate").unwrap();
 
@@ -1303,9 +1303,9 @@ impl Widget<FractalData> for FractalWidget {
                             }
                         },
                         1 => {
-                            let real = settings.get_str("real").unwrap();
-                            let imag = settings.get_str("imag").unwrap();
-                            let zoom = settings.get_str("zoom").unwrap();
+                            let real = settings.get_string("real").unwrap();
+                            let imag = settings.get_string("imag").unwrap();
+                            let zoom = settings.get_string("zoom").unwrap();
                             let iterations = settings.get_int("iterations").unwrap();
                             let rotate = settings.get_float("rotate").unwrap();
 
@@ -1313,11 +1313,11 @@ impl Widget<FractalData> for FractalWidget {
                             let image_height = settings.get_int("image_height").unwrap();
                             let glitch_percentage = settings.get_float("glitch_percentage").unwrap();
                             let approximation_order = settings.get_int("approximation_order").unwrap();
-                            let coloring_type = settings.get_str("coloring_type").unwrap();
+                            let coloring_type = settings.get_string("coloring_type").unwrap();
 
                             let palette = renderer.data_export.lock().palette_interpolated_buffer.clone().into_iter().flat_map(|seq| {
-                                let (r, g, b, _) = seq.rgba_u8();
-                                vec![r, g, b]
+                                let rgba = seq.to_rgba8();
+                                vec![rgba[0], rgba[1], rgba[2]]
                             }).collect::<Vec<u8>>();
                             let palette_iteration_span = settings.get_float("palette_iteration_span").unwrap();
                             let palette_offset = settings.get_float("palette_offset").unwrap();
